@@ -1,4 +1,4 @@
--- plugins from kickstart.nvim
+-- plugin setup from kickstart.nvim
 require('lazy').setup({
 
   require 'custom',
@@ -282,13 +282,15 @@ require('lazy').setup({
         ols = {},
         pyright = {},
         lua_ls = {
-          -- cmd = {...},
-          -- filetypes = { ...},
-          -- capabilities = {},
           settings = {
             Lua = {
               completion = {
                 callSnippet = 'Replace',
+              },
+              workspace = {
+                library = {
+                  '${3rd}/love2d/library',
+                },
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },

@@ -13,25 +13,21 @@ local function find_build_file()
   return nil, nil -- No file found
 end
 
--- Function to load project-specific build command
-return {
-  load_project_build = function()
-    local build_file, build_dir = find_build_file()
-    if build_file then
-      local _, build_and_run = pcall(dofile, build_file) -- build_and_run function
+-- load project-specific build command
+local build_file, build_dir = find_build_file()
+if build_file then
+  local _, build_and_run = pcall(dofile, build_file) -- build_and_run function
 
-      -- Map <leader>b to the function returned by `build.lua`
-      if build_and_run then
-        vim.keymap.set('n', '<leader>b', function()
-          -- cd to build dir
-          local cwd = vim.fn.getcwd()
-          vim.cmd('cd ' .. build_dir)
-          build_and_run()
-          vim.cmd('cd ' .. cwd) -- restore cwd
-        end, { silent = true, noremap = true, desc = 'execute build.lua' })
-      else
-        vim.notify('function not defined in ' .. build_file, vim.log.levels.WARN)
-      end
-    end
-  end,
-}
+  -- Map <leader>b to the function returned by `build.lua`
+  if build_and_run then
+    vim.keymap.set('n', '<leader>b', function()
+      -- cd to build dir
+      local cwd = vim.fn.getcwd()
+      vim.cmd('cd ' .. build_dir)
+      build_and_run()
+      vim.cmd('cd ' .. cwd) -- restore cwd
+    end, { silent = true, noremap = true, desc = 'execute build.lua' })
+  else
+    vim.notify('function not defined in ' .. build_file, vim.log.levels.WARN)
+  end
+end

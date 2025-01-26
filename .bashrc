@@ -62,17 +62,18 @@ export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
-######################################
+#######################################################
 # ALIAS'S
 #######################################################
 
 alias vim='nvim'
 alias python='python3'
-alias sbcl="rlwrap sbcl"
-alias narga="ssh 28087887@open.rga.stb.sun.ac.za"
+alias sbcl='rlwrap sbcl'
+alias narga='ssh 28087887@open.rga.stb.sun.ac.za'
 alias open='xdg-open'
-alias http 'python -m http.server'
+alias http='python3 -m http.server'
 alias icat='kitten icat'
+
 
 # Alias's to modified commands
 alias cp='cp -i'
@@ -92,7 +93,7 @@ alias search="fzf --preview 'bat --color=always --style=numbers --line-range=:50
 
 
 ######################################
-# ALIAS'S
+# FUNCTIONS
 #######################################################
 
 function kys () {

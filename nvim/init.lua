@@ -66,7 +66,7 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
   command = 'set formatoptions-=cro | set formatoptions+=t',
 })
 
--- Load the project-specific build.lua
+-- Load a project-specific build.lua
 require 'project_build'
 
 -- Includes

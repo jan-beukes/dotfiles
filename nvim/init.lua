@@ -1,6 +1,5 @@
 -- Options
 
--- globals
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.cmptoggle = true
@@ -12,7 +11,6 @@ vim.opt.autochdir = true
 vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
-vim.opt.autoindent = true
 
 vim.opt.signcolumn = 'no'
 vim.opt.number = true
@@ -39,11 +37,9 @@ vim.opt.smartcase = true
 
 -- Decrease update time
 vim.opt.updatetime = 250
--- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
 vim.opt.timeoutlen = 300
 
--- Configure how new splits should be opened
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
@@ -58,7 +54,6 @@ vim.opt.inccommand = 'split'
 
 -- Show which line your cursor is on
 vim.opt.cursorline = true
--- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
 -- remove stupid autocomment
@@ -66,8 +61,12 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
   command = 'set formatoptions-=cro | set formatoptions+=t',
 })
 
--- Load a project-specific build.lua
-require 'project_build'
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+  pattern = '*.asm,*.inc',
+  callback = function()
+    vim.opt.filetype = 'fasm'
+  end,
+})
 
 -- Includes
 require 'keymaps'

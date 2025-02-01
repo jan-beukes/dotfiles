@@ -97,7 +97,7 @@ alias search="fzf --preview 'bat --color=always --style=numbers --line-range=:50
 #######################################################
 
 function kys () {
-	pgrep $1 | kill
+	pgrep $1 | xargs kill
 }
 
 # Automatically do an ls after each cd, z, or zoxide

@@ -249,7 +249,7 @@ require('lazy').setup({
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
       capabilities.textDocument.completion.completionItem.snippetSupport = false
 
-      -- LSP SERVERS
+      --- LSP SERVERS ---
       local servers = {
         clangd = {
           cmd = {
@@ -261,8 +261,17 @@ require('lazy').setup({
             client.server_capabilities.semanticTokensProvider = nil
           end,
         },
+        jdtls = {
+          on_attach = function(client, bufnr)
+            -- Disable auto-imports by ignoring related LSP requests
+            client.server_capabilities.completionProvider.resolveProvider = false
+            client.server_capabilities.codeActionProvider = false
+          end,
+        },
         zls = {},
-        ols = {},
+        ols = {
+          init_options = { enable_format = false },
+        },
         pyright = {},
         lua_ls = {
           settings = {
@@ -275,13 +284,10 @@ require('lazy').setup({
                   '${3rd}/love2d/library',
                 },
               },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
             },
           },
         },
       }
-
       require('mason').setup()
 
       local ensure_installed = vim.tbl_keys(servers or {})

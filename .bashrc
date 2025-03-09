@@ -9,7 +9,6 @@ elif [ -f /etc/bash_completion ]; then
 fi
 
 ## EXPORTS
-
 # Expand the history size
 export HISTFILESIZE=10000
 export HISTSIZE=500
@@ -50,14 +49,12 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
 # ALIAS'S
-
 alias vim='nvim'
 alias python='python3'
 alias sbcl='rlwrap sbcl'
-alias narga='kitten ssh 28087887@open.rga.stb.sun.ac.za'
+alias narga='ssh 28087887@open.rga.stb.sun.ac.za'
 alias open='xdg-open'
 alias http='python3 -m http.server'
-alias icat='kitten icat'
 
 alias cp='cp -i'
 alias mv='mv -i'
@@ -75,6 +72,9 @@ alias search="fzf --preview 'bat --color=always --style=numbers --line-range=:50
 
 
 ## FUNCTIONS
+function kys-now () {
+	shutdown now
+}
 
 function kys () {
 	pgrep $1 | xargs kill

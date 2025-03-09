@@ -8,6 +8,7 @@ vim.diagnostic.enable(false)
 -- format
 vim.opt.textwidth = 100
 vim.opt.autochdir = true
+vim.opt.autoindent = true
 vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
@@ -47,9 +48,9 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 
 -- remove autocomment
--- vim.api.nvim_create_autocmd('BufWinEnter', {
---   command = 'set formatoptions-=cro | set formatoptions+=t',
--- })
+vim.api.nvim_create_autocmd('BufWinEnter', {
+  command = 'set formatoptions-=ro | set formatoptions+=t',
+})
 
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = '*.asm,*.inc',

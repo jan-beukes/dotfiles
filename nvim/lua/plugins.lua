@@ -263,30 +263,22 @@ require('lazy').setup({
         },
         jdtls = {
           on_attach = function(client, bufnr)
-            -- Disable auto-imports by ignoring related LSP requests
+            -- Disable auto imports
             client.server_capabilities.completionProvider.resolveProvider = false
             client.server_capabilities.codeActionProvider = false
           end,
         },
+        ols = {},
         zls = {},
-        ols = {
-          init_options = { enable_format = false },
+        rust_analyzer = {
+          on_attach = function(client, bufnr)
+            -- Disable auto imports
+            client.server_capabilities.completionProvider.resolveProvider = false
+            client.server_capabilities.codeActionProvider = false
+          end,
         },
         pyright = {},
-        lua_ls = {
-          settings = {
-            Lua = {
-              completion = {
-                callSnippet = 'Replace',
-              },
-              workspace = {
-                library = {
-                  '${3rd}/love2d/library',
-                },
-              },
-            },
-          },
-        },
+        lua_ls = {},
       }
       require('mason').setup()
 

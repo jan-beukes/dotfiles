@@ -51,6 +51,7 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 # ALIAS'S
 alias vim='nvim'
 alias python='python3'
+alias venv='source .venv/bin/activate'
 alias sbcl='rlwrap sbcl'
 alias narga='ssh 28087887@open.rga.stb.sun.ac.za'
 alias open='xdg-open'

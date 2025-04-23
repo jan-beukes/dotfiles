@@ -2,7 +2,8 @@
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-vim.g.cmptoggle = true
+
+vim.g.cmptoggle = false
 vim.diagnostic.enable(false)
 
 -- format
@@ -12,46 +13,39 @@ vim.opt.autoindent = true
 vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
+vim.opt.scrolloff = 5
 
-vim.opt.signcolumn = 'no'
+--vim.opt.guicursor = ''
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.signcolumn = 'no'
 vim.opt.termguicolors = true
-
-vim.opt.mouse = 'a'
 vim.opt.showmode = false
 
+vim.cmd.colorscheme 'habamax'
+vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
+vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE" })
+
+vim.opt.mouse = 'a'
 -- Sync clipboard between OS and Neovim.
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
 
 vim.opt.breakindent = true
-
 vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-
--- Decrease update time
-vim.opt.updatetime = 250
-vim.opt.timeoutlen = 300
+-- Preview substitutions live, as you type
+vim.opt.inccommand = 'split'
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 vim.opt.list = true
 vim.opt.listchars = { tab = '· ', trail = ' ', nbsp = '␣' }
--- Preview substitutions live, as you type!
-vim.opt.inccommand = 'split'
 
-vim.opt.cursorline = true
-vim.opt.scrolloff = 10
-
--- remove autocomment
-vim.api.nvim_create_autocmd('BufWinEnter', {
-  command = 'set formatoptions-=ro | set formatoptions+=t',
-})
-
+-- fasm highlighting
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = '*.asm,*.inc',
   callback = function()

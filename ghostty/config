@@ -1,13 +1,12 @@
 font-family = "Iosevka NF Medium"
 font-size = 22
-theme = GruvboxDark
 window-theme = ghostty
 background = 181818
 
 shell-integration-features = no-cursor
 cursor-style = block
 cursor-opacity = 0.8
-adjust-cursor-thickness = 1
+adjust-cursor-thickness = 2
 
 confirm-close-surface = false
 maximize = true

@@ -16,7 +16,7 @@ export HISTTIMEFORMAT="%F %T"
 export HISTCONTROL=erasedups:ignoredups:ignorespace
 
 # Check the window size after each command and, if necessary, update the values of LINES and COLUMNS
-shopt -s checkwinsize
+ shopt -s checkwinsize
 
 # Causes bash to append to history instead of overwriting it so if you start a new terminal, you have old session history
 shopt -s histappend

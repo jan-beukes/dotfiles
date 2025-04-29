@@ -19,12 +19,8 @@ vim.opt.scrolloff = 5
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = 'no'
-vim.opt.termguicolors = true
+-- vim.opt.termguicolors = true
 vim.opt.showmode = false
-
-vim.cmd.colorscheme 'habamax'
-vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
-vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE" })
 
 vim.opt.mouse = 'a'
 -- Sync clipboard between OS and Neovim.

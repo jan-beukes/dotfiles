@@ -1,4 +1,4 @@
--- bootstrap `lazy.nvim` plugin manager
+-- bootstrap `lazy.nvim`
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
@@ -14,12 +14,12 @@ require('lazy').setup {
 
   -- Colorscheme
   {
-    'sainnhe/gruvbox-material',
-    lazy = false,
-    priority = 1000,
+    'ramojus/mellifluous.nvim',
     config = function()
-      vim.g.gruvbox_material_transparent_background = true
-      vim.cmd.colorscheme 'gruvbox-material'
+      require('mellifluous').setup {
+        transparent_background = { enabled = true },
+      }
+      vim.cmd 'colorscheme mellifluous'
     end,
   },
 
@@ -40,16 +40,16 @@ require('lazy').setup {
   {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
-    -- Optional dependency
     dependencies = { 'hrsh7th/nvim-cmp' },
     config = function()
       require('nvim-autopairs').setup {}
-      -- If you want to automatically add `(` after selecting a function or method
       local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
       local cmp = require 'cmp'
       cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
     end,
   },
+
+  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   -- markdown viewing
   {
@@ -65,11 +65,10 @@ require('lazy').setup {
     end,
   },
 
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
-  { -- Useful plugin to show you pending keybinds.
+  -- Useful plugin to show you pending keybinds.
+  {
     'folke/which-key.nvim',
     event = 'VimEnter',
     opts = {
@@ -106,7 +105,6 @@ require('lazy').setup {
           F12 = '<F12>',
         },
       },
-
       -- Document existing key chains
       spec = {
         { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
@@ -120,7 +118,8 @@ require('lazy').setup {
     },
   },
 
-  { -- Fuzzy Finder (files, lsp, etc)
+  -- Fuzzy Finder (files, lsp, etc)
+  {
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
     branch = '0.1.x',
@@ -240,18 +239,14 @@ require('lazy').setup {
           end
 
           -- Jump to the definition of the word under your cursor.
-          --  This is where a variable was first declared, or where a function is defined, etc.
-          --  To jump back, press <C-t>.
-          map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-          map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-          map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-          map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-          map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-          map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+          map('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+          map('gr', vim.lsp.buf.references, '[G]oto [R]eferences')
+          map('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
+          map('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
+          map('<leader>ds', vim.lsp.buf.document_symbol, '[D]ocument [S]ymbols')
+          map('<leader>ws', vim.lsp.buf.workspace_symbol, '[W]orkspace [S]ymbols')
           map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
-          -- WARN: This is not Goto Definition, this is Goto Declaration.
-          --  For example, in C this would take you to the header.
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
         end,
       })
@@ -420,5 +415,19 @@ require('lazy').setup {
         },
       }
     end,
+  },
+  { -- Highlight, edit, and navigate code
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
+    opts = {
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      auto_install = false,
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = { 'ruby' },
+      },
+      indent = { enable = true, disable = { 'ruby' } },
+    },
   },
 }

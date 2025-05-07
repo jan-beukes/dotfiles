@@ -6,7 +6,7 @@ background = 181818
 shell-integration-features = no-cursor
 cursor-style = block
 cursor-opacity = 0.8
-adjust-cursor-thickness = 2
+adjust-cursor-thickness = 1
 
 confirm-close-surface = false
 maximize = true

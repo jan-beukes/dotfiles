@@ -1,24 +1,23 @@
 #!/usr/bin/env bash
 iatest=$(expr index "$-" i)
 
-# Enable bash programmable completion features in interactive shells
+# Enable bash completion features
 if [ -f /usr/share/bash-completion/bash_completion ]; then
-	. /usr/share/bash-completion/bash_completion
+        . /usr/share/bash-completion/bash_completion
 elif [ -f /etc/bash_completion ]; then
-	. /etc/bash_completion
+        . /etc/bash_completion
 fi
 
 ## EXPORTS
-# Expand the history size
 export HISTFILESIZE=10000
 export HISTSIZE=500
 export HISTTIMEFORMAT="%F %T"
 export HISTCONTROL=erasedups:ignoredups:ignorespace
 
-# Check the window size after each command and, if necessary, update the values of LINES and COLUMNS
+# Check the window size
  shopt -s checkwinsize
 
-# Causes bash to append to history instead of overwriting it so if you start a new terminal, you have old session history
+# append to history instead of overwriting it
 shopt -s histappend
 PROMPT_COMMAND='history -a'
 
@@ -30,7 +29,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 
 # Ignore case on auto-completion
 if [[ $iatest -gt 0 ]]; then bind "set completion-ignore-case on"; fi
-# Show auto-completion list automatically, without double tab
+# Show completion list automatically, without double tab
 if [[ $iatest -gt 0 ]]; then bind "set show-all-if-ambiguous On"; fi
 
 # To have colors for ls and all grep commands
@@ -47,10 +46,7 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
 # ALIAS'S
-alias vim='nvim'
 alias python='python3'
-alias venv='source .venv/bin/activate'
-alias sbcl='rlwrap sbcl'
 alias narga='ssh 28087887@open.rga.stb.sun.ac.za'
 alias open='xdg-open'
 alias http='python3 -m http.server'
@@ -67,24 +63,16 @@ alias lsl='ls -lah'
 alias du='du -h'
 
 alias f="find . -name"
-alias search="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}' | xargs nvim"
-
-
-## FUNCTIONS
-function kys () {
-	pgrep $1 | xargs kill
-}
 
 # Automatically do an ls after each cd, z, or zoxide
 function cd () {
-	if [ -n "$1" ]; then
-		builtin cd "$@" && ls
-	else
-		builtin cd ~ && ls
-	fi
+        if [ -n "$1" ]; then
+                builtin cd "$@" && ls
+        else
+                builtin cd ~ && ls
+        fi
 }
 
-alias whatismyip="whatsmyip"
 function whatsmyip () {
     if command -v ip &> /dev/null; then
         echo -n "Internal IP: "

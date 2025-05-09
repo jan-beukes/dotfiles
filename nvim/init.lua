@@ -3,7 +3,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-vim.g.cmptoggle = true
+vim.g.cmptoggle = false
 vim.diagnostic.enable(false)
 
 -- format

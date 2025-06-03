@@ -11,7 +11,6 @@ vim.opt.rtp:prepend(lazypath)
 
 -- plugin setup
 require('lazy').setup {
-
   -- Colorscheme
   {
     'ramojus/mellifluous.nvim',
@@ -22,7 +21,6 @@ require('lazy').setup {
       vim.cmd 'colorscheme mellifluous'
     end,
   },
-
   -- Oil.nvim
   {
     'stevearc/oil.nvim',
@@ -36,7 +34,6 @@ require('lazy').setup {
       },
     },
   },
-
   {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
@@ -48,25 +45,8 @@ require('lazy').setup {
       cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
     end,
   },
-
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-
-  -- markdown viewing
-  {
-    'toppair/peek.nvim',
-    event = { 'VeryLazy' },
-    build = 'deno task --quiet build:fast',
-    config = function()
-      require('peek').setup {
-        app = 'browser',
-      }
-      vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
-      vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
-    end,
-  },
-
+  -- 'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
-
   -- Useful plugin to show you pending keybinds.
   {
     'folke/which-key.nvim',

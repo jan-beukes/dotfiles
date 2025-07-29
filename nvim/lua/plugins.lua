@@ -11,6 +11,7 @@ vim.opt.rtp:prepend(lazypath)
 
 -- plugin setup
 require('lazy').setup {
+
   -- Colorscheme
   {
     'ramojus/mellifluous.nvim',
@@ -21,6 +22,9 @@ require('lazy').setup {
       vim.cmd 'colorscheme mellifluous'
     end,
   },
+
+  -- 'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+
   -- Oil.nvim
   {
     'stevearc/oil.nvim',
@@ -45,7 +49,7 @@ require('lazy').setup {
       cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
     end,
   },
-  -- 'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
   -- Useful plugin to show you pending keybinds.
   {
@@ -232,27 +236,11 @@ require('lazy').setup {
       })
 
       --- LANGUAGE SERVERS ---
-      -- Disable lsp nonsense
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
-      capabilities.textDocument.completion.completionItem.snippetSupport = false
-
-      local disable_features = function(client, bufnr)
-        client.server_capabilities.completionProvider.resolveProvider = false
-        client.server_capabilities.codeActionProvider = false
-        client.server_capabilities.semanticTokensProvider = nil
-      end
-
       local servers = {
         lua_ls = {},
-        clangd = { on_attach = disable_features },
-        jdtls = { on_attach = disable_features },
-        rust_analyzer = { on_attach = disable_features },
-        ols = {
-          init_options = {
-            enable_format = false,
-          },
-        },
+        clangd = {},
+        rust_analyzer = {},
+        ols = {},
       }
       require('mason').setup()
 
@@ -273,7 +261,7 @@ require('lazy').setup {
       }
     end,
   },
-
+  --
   { -- Autoformat
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },

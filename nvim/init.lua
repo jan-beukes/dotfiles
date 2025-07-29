@@ -45,11 +45,11 @@ vim.opt.listchars = { tab = '· ', trail = ' ', nbsp = '␣' }
 vim.api.nvim_create_autocmd('BufWinEnter', {
   command = 'set formatoptions-=cro | set formatoptions+=t',
 })
--- fasm highlighting
+
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = '*.asm,*.inc',
   callback = function()
-    vim.opt.filetype = 'fasm'
+    vim.opt.filetype = 'nasm'
   end,
 })
 

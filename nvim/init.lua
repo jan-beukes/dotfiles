@@ -1,5 +1,4 @@
 -- Options
-
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -15,7 +14,6 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.scrolloff = 5
 
---vim.opt.guicursor = ''
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = 'no'
@@ -41,7 +39,7 @@ vim.opt.splitbelow = true
 vim.opt.list = true
 vim.opt.listchars = { tab = '· ', trail = ' ', nbsp = '␣' }
 
--- remove stupid autocomment
+-- remove autocomment
 vim.api.nvim_create_autocmd('BufWinEnter', {
   command = 'set formatoptions-=cro | set formatoptions+=t',
 })

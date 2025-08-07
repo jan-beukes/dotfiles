@@ -11,7 +11,6 @@ vim.opt.rtp:prepend(lazypath)
 
 -- plugin setup
 require('lazy').setup {
-
   -- Colorscheme
   {
     'ramojus/mellifluous.nvim',
@@ -23,7 +22,7 @@ require('lazy').setup {
     end,
   },
 
-  -- 'tpope/vim-sleuth',
+  'tpope/vim-sleuth',
 
   -- Oil.nvim
   {

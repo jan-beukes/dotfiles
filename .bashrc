@@ -57,10 +57,13 @@ alias la='ls -ah'
 alias lsl='ls -lah'
 alias du='du -h'
 
-alias f="find . -name"
+# Search in directory $1 for file names contain $2
+f() {
+    find $1 -name "*$2*"
+}
 
 # Automatically do an ls after each cd
-function cd () {
+cd() {
     if [ -n "$1" ]; then
         builtin cd "$@" && ls
     else
@@ -68,7 +71,7 @@ function cd () {
     fi
 }
 
-function whatsmyip () {
+whatsmyip() {
     if command -v ip &> /dev/null; then
         echo -n "Internal IP: "
         ip addr show wlan0 | grep "inet " | awk '{print $2}' | cut -d/ -f1

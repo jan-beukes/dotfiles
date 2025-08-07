@@ -6,12 +6,12 @@ vim.g.cmptoggle = false
 vim.diagnostic.enable(false)
 
 -- format
-vim.opt.textwidth = 100
-vim.opt.autochdir = true
-vim.opt.autoindent = true
-vim.opt.expandtab = true
+vim.opt.textwidth = 80
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
+vim.opt.autoindent = true
+vim.opt.expandtab = true
+vim.opt.autochdir = true
 vim.opt.scrolloff = 5
 
 vim.opt.number = true

@@ -1,4 +1,4 @@
--- bootstrap `lazy.nvim`
+-- bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
@@ -11,17 +11,19 @@ vim.opt.rtp:prepend(lazypath)
 
 -- plugin setup
 require('lazy').setup {
+
   -- Colorscheme
   {
     'ramojus/mellifluous.nvim',
     config = function()
       require('mellifluous').setup {
-        transparent_background = { enabled = true },
+        transparent_background = { enabled = true, floating_windows = false },
       }
       vim.cmd 'colorscheme mellifluous'
     end,
   },
 
+  -- tries to guess formating of current file/directory
   'tpope/vim-sleuth',
 
   -- Oil.nvim
@@ -50,7 +52,10 @@ require('lazy').setup {
     end,
   },
 
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  { 
+    'folke/todo-comments.nvim', event = 'VimEnter',
+    dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false }
+  },
 
   {
     'folke/which-key.nvim',
@@ -135,7 +140,7 @@ require('lazy').setup {
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
 
-      -- See `:help telescope.builtin`
+      -- Telescope keymaps
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
@@ -185,36 +190,24 @@ require('lazy').setup {
     end,
   },
 
-  { -- Highlight, edit, and navigate code
+  -- Treesitter
+  {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 
+        'bash', 'c', 'lua', 'luadoc', 'markdown', 'markdown_inline', 
+        'query', 'vim', 'vimdoc',
+      },
       auto_install = false,
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = { 'ruby' },
-      },
-      indent = { enable = true, disable = { 'ruby' } },
+      highlight = { enable = true },
+      indent = { enable = true },
     },
   },
 
-  -- LSP Plugins
+   -- LSP Configuration
   {
-    'folke/lazydev.nvim',
-    ft = 'lua',
-    opts = {
-      library = {
-        -- Load luvit types when the `vim.uv` word is found
-        { path = 'luvit-meta/library', words = { 'vim%.uv' } },
-      },
-    },
-  },
-  { 'Bilal2453/luvit-meta', lazy = true },
-
-  {
-    -- Main LSP Configuration
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
@@ -266,4 +259,16 @@ require('lazy').setup {
       }
     end,
   },
+  -- Better lua lsp stuff
+  {
+    'folke/lazydev.nvim',
+    ft = 'lua',
+    opts = {
+      library = {
+        -- Load luvit types when the `vim.uv` word is found
+        { path = 'luvit-meta/library', words = { 'vim%.uv' } },
+      },
+    },
+  },
+  { 'Bilal2453/luvit-meta', lazy = true },
 }

@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-iatest=$(expr index "$-" i)
 
 # Slop completion
 if [ -f /usr/share/bash-completion/bash_completion ]; then
@@ -9,19 +8,22 @@ elif [ -f /etc/bash_completion ]; then
 fi
 
 # Interactive
+iatest=$(expr index "$-" i)
 if [[ $iatest -gt 0 ]]; then
     # Ignore case
     bind "set completion-ignore-case on"
     bind "set show-all-if-ambiguous On"
-
-    # SSH Agent
-    eval "$(keychain --eval id_rsa --noask -q)"
 fi
 
-## EXPORTS
+#---EXPORTS---
+
+# Tell mesa to shut up about not being able to load nvidia driver
+export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
+export MANPAGER='nvim +Man!'
+
 export HISTFILESIZE=10000
 export HISTSIZE=500
-export HISTTIMEFORMAT="%F %T"
+export HISTTIMEFORMAT="%F %T - "
 export HISTCONTROL=erasedups:ignoredups:ignorespace
 shopt -s histappend
 PROMPT_COMMAND='history -a'
@@ -32,9 +34,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
-export MANPAGER='nvim +Man!'
-
-## ALIAS'S
+#---ALIAS---
 alias vim='nvim'
 alias python='python3'
 alias narga='ssh 28087887@open.rga.stb.sun.ac.za'
@@ -48,14 +48,14 @@ alias mkdir='mkdir -p'
 alias ls='eza'
 alias la='eza -ah'
 alias lsl='eza -lah'
+alias less='less -R'
 alias grep='grep --color=auto'
 alias du='du -h'
 
-# Search in directory $1 for file names contain $2
+# Search in directory $1 for file names containing $2
 f() {
     find $1 -name "*$2*"
 }
-
 # Automatically do an ls after each cd
 cd() {
     if [ -n "$1" ]; then
@@ -77,7 +77,7 @@ whatsmyip() {
     curl -s ifconfig.me
 }
 
-# Bind Ctrl+f to insert 'zi'
+# Bind Ctrl+f to insert zoxide
 if [[ $- == *i* ]]; then
     bind '"\C-f":"zi\n"'
 fi

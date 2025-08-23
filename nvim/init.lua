@@ -1,11 +1,9 @@
 -- Options
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-
-vim.g.cmptoggle = false
 vim.diagnostic.enable(false)
 
--- format
+-- Format
 vim.opt.textwidth = 80
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
@@ -44,11 +42,17 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
   command = 'set formatoptions-=cro | set formatoptions+=t',
 })
 
+-- Autocommands --
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
-  pattern = '*.asm,*.inc',
+  pattern = { '*.asm' ,'*.inc' },
   callback = function()
     vim.opt.filetype = 'nasm'
   end,
+})
+
+vim.api.nvim_create_autocmd({'BufReadPost', 'BufNewFile'}, {
+  pattern = { '*.wistl' },
+  command = 'setfiletype wistl',
 })
 
 require 'keymaps'

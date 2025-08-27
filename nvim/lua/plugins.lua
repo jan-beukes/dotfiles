@@ -23,7 +23,6 @@ require('lazy').setup {
     end,
   },
 
-  -- tries to guess formating of current file/directory
   'tpope/vim-sleuth',
 
   -- Oil.nvim
@@ -39,24 +38,27 @@ require('lazy').setup {
       },
     },
   },
-
-  {
-    'windwp/nvim-autopairs',
-    event = 'InsertEnter',
-    dependencies = { 'hrsh7th/nvim-cmp' },
-    config = function()
-      require('nvim-autopairs').setup {}
-      local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
-      local cmp = require 'cmp'
-      cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
-    end,
-  },
-
   { 
     'folke/todo-comments.nvim', event = 'VimEnter',
     dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false }
   },
+  {
+    'echasnovski/mini.nvim',
+    config = function()
+      require('mini.pairs').setup()
+      -- Better Around/Inside textobjects
+      require('mini.ai').setup { n_lines = 500 }
+      -- Add/delete/replace surroundings (brackets, quotes, etc.)
+      require('mini.surround').setup()
 
+      -- Simple and easy statusline.
+      local statusline = require 'mini.statusline'
+      statusline.setup { use_icons = vim.g.have_nerd_font }
+      statusline.section_location = function()
+        return '%2l:%-2v'
+      end
+    end,
+  },
   {
     'folke/which-key.nvim',
     event = 'VimEnter',
@@ -113,9 +115,8 @@ require('lazy').setup {
     event = 'VimEnter',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      { -- If encountering errors, see telescope-fzf-native README for installation instructions
+      {
         'nvim-telescope/telescope-fzf-native.nvim',
-        -- This is only run then, not every time Neovim starts up.
         build = 'make',
         cond = function()
           return vim.fn.executable 'make' == 1
@@ -123,12 +124,10 @@ require('lazy').setup {
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
-      -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
       -- [[ Configure Telescope ]]
-      -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
         extensions = {
           ['ui-select'] = {
@@ -173,102 +172,4 @@ require('lazy').setup {
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },
-
-  {
-    'echasnovski/mini.nvim',
-    config = function()
-      -- Better Around/Inside textobjects
-      require('mini.ai').setup { n_lines = 500 }
-      -- Add/delete/replace surroundings (brackets, quotes, etc.)
-      require('mini.surround').setup()
-      -- Simple and easy statusline.
-      local statusline = require 'mini.statusline'
-      statusline.setup { use_icons = vim.g.have_nerd_font }
-      statusline.section_location = function()
-        return '%2l:%-2v'
-      end
-    end,
-  },
-
-  -- Treesitter
-  {
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
-    opts = {
-      ensure_installed = { 
-        'bash', 'c', 'lua', 'luadoc', 'markdown', 'markdown_inline', 
-        'query', 'vim', 'vimdoc',
-      },
-      auto_install = false,
-      highlight = { enable = true },
-      indent = { enable = true },
-    },
-  },
-
-   -- LSP Configuration
-  {
-    'neovim/nvim-lspconfig',
-    dependencies = {
-      -- Automatically install LSPs and related tools to stdpath for Neovim
-      { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
-      'williamboman/mason-lspconfig.nvim',
-      'WhoIsSethDaniel/mason-tool-installer.nvim',
-    },
-    config = function()
-      vim.api.nvim_create_autocmd('LspAttach', {
-        group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
-        callback = function(event)
-          local map = function(keys, func, desc, mode)
-            mode = mode or 'n'
-            vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
-          end
-
-          -- Jump to the definition of the word under your cursor.
-          map('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-          map('gr', vim.lsp.buf.references, '[G]oto [R]eferences')
-          map('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-          map('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-          map('<leader>ds', vim.lsp.buf.document_symbol, '[D]ocument [S]ymbols') map('<leader>ws', vim.lsp.buf.workspace_symbol, '[W]orkspace [S]ymbols')
-          map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
-          map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-        end,
-      })
-
-      --- LANGUAGE SERVERS ---
-      local servers = {
-        lua_ls = {},
-        clangd = {},
-        rust_analyzer = {},
-        ols = {},
-      }
-      require('mason').setup()
-
-      local ensure_installed = vim.tbl_keys(servers)
-      require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
-      require('mason-lspconfig').setup {
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
-          end,
-        },
-      }
-    end,
-  },
-  -- Better lua lsp stuff
-  {
-    'folke/lazydev.nvim',
-    ft = 'lua',
-    opts = {
-      library = {
-        -- Load luvit types when the `vim.uv` word is found
-        { path = 'luvit-meta/library', words = { 'vim%.uv' } },
-      },
-    },
-  },
-  { 'Bilal2453/luvit-meta', lazy = true },
 }

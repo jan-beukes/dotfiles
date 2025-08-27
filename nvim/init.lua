@@ -37,19 +37,17 @@ vim.opt.splitbelow = true
 vim.opt.list = true
 vim.opt.listchars = { tab = '· ', trail = ' ', nbsp = '␣' }
 
+-- Autocommands
 -- remove autocomment
 vim.api.nvim_create_autocmd('BufWinEnter', {
   command = 'set formatoptions-=cro | set formatoptions+=t',
 })
-
--- Autocommands --
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = { '*.asm' ,'*.inc' },
   callback = function()
     vim.opt.filetype = 'nasm'
   end,
 })
-
 vim.api.nvim_create_autocmd({'BufReadPost', 'BufNewFile'}, {
   pattern = { '*.wistl' },
   command = 'setfiletype wistl',

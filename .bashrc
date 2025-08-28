@@ -18,6 +18,7 @@ fi
 
 # Tell mesa to shut up about not being able to load nvidia driver
 export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
+export NARGA="28087887@open.rga.stb.sun.ac.za"
 
 export HISTFILESIZE=10000
 export HISTSIZE=500
@@ -46,8 +47,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 alias vim='nvim'
 alias python='python3'
 alias open='xdg-open'
-alias fastfetch='fastfetch -c neofetch'
-alias narga='28087887@open.rga.stb.sun.ac.za'
+alias fastfetch='fastfetch -c neofetch --logo gnu'
 alias http='python3 -m http.server'
 
 alias cp='cp -i'

@@ -1,7 +1,5 @@
--- Options
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-vim.diagnostic.enable(false)
 
 -- Format
 vim.opt.textwidth = 80
@@ -28,7 +26,7 @@ vim.opt.breakindent = true
 vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
--- Preview substitutions live, as you type
+-- Preview replacements live
 vim.opt.inccommand = 'split'
 
 vim.opt.splitright = true
@@ -42,6 +40,7 @@ vim.opt.listchars = { tab = '· ', trail = ' ', nbsp = '␣' }
 vim.api.nvim_create_autocmd('BufWinEnter', {
   command = 'set formatoptions-=cro | set formatoptions+=t',
 })
+
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = { '*.asm' ,'*.inc' },
   callback = function()

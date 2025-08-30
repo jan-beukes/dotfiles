@@ -34,3 +34,16 @@ vim.api.nvim_create_autocmd({'BufReadPost', 'BufNewFile'}, {
   pattern = { '*.wistl' },
   command = 'setfiletype wistl',
 })
+
+-- nicer :terminal
+vim.api.nvim_create_user_command("T", function(opts)
+  if opts.args == "" then return end
+  vim.cmd("belowright split")
+  vim.cmd("terminal " .. opts.args)
+end, { 
+  nargs = "*",
+  complete = function(arg_lead, cmd_line, cursor_pos)
+      -- Use shell command completion from :term
+      return vim.fn.getcompletion(arg_lead, 'shellcmd')
+    end
+})

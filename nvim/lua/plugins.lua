@@ -11,7 +11,6 @@ vim.opt.rtp:prepend(lazypath)
 
 -- plugin setup
 require('lazy').setup {
-
   -- Colorscheme
   {
     'ramojus/mellifluous.nvim',
@@ -24,6 +23,20 @@ require('lazy').setup {
   },
 
   'tpope/vim-sleuth',
+
+  -- Compile Mode
+  {
+    'ej-shafran/compile-mode.nvim',
+    version = "^5.0.0",
+    branch = "latest",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "m00qek/baleia.nvim",
+    },
+    config = function()
+      vim.g.compile_mode = { baleia_setup = true }
+    end
+  },
 
   -- Oil.nvim
   {
@@ -38,10 +51,12 @@ require('lazy').setup {
       },
     },
   },
+
   { 
     'folke/todo-comments.nvim', event = 'VimEnter',
     dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false }
   },
+
   {
     'echasnovski/mini.nvim',
     config = function()
@@ -58,6 +73,7 @@ require('lazy').setup {
       end
     end,
   },
+
   {
     'folke/which-key.nvim',
     event = 'VimEnter',
@@ -107,7 +123,7 @@ require('lazy').setup {
       },
     },
   },
-  -- Fuzzy Finder (files, lsp, etc)
+  -- Fuzzy Finder
   {
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
@@ -121,7 +137,6 @@ require('lazy').setup {
         end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
-
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
@@ -133,10 +148,8 @@ require('lazy').setup {
           },
         },
       }
-
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
-
       -- Telescope keymaps
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
@@ -190,7 +203,6 @@ require('lazy').setup {
       },
     },
   },
-
   -- LSP slop
   {
     'neovim/nvim-lspconfig',
@@ -241,5 +253,4 @@ require('lazy').setup {
       }
     end,
   },
-
 }

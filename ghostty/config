@@ -3,12 +3,10 @@ font-size = 22
 window-theme = ghostty
 background = 181818
 theme = Mellifluous
-
 shell-integration-features = no-cursor
 cursor-style = block
 cursor-opacity = 0.8
 adjust-cursor-thickness = 1
-
 confirm-close-surface = false
 maximize = true
 

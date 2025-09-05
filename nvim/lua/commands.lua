@@ -10,7 +10,6 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 --[[ Commands/Autocommands ]]
-
 -- Highlight when yanking text
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',

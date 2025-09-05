@@ -13,8 +13,8 @@ vim.opt.scrolloff = 5
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = 'no'
-vim.opt.termguicolors = true
 vim.opt.showmode = false
+vim.opt.termguicolors = true
 
 vim.opt.mouse = 'a'
 -- Sync clipboard between OS and Neovim.

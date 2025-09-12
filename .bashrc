@@ -47,8 +47,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 alias vim='nvim'
 alias python='python3'
 alias open='xdg-open'
-alias fastfetch='fastfetch -c neofetch --logo gnu'
-alias http='python3 -m http.server'
+alias fastfetch='fastfetch -c neofetch'
 
 alias cp='cp -i'
 alias mv='mv -i'
@@ -63,11 +62,7 @@ alias du='du -h'
 
 # Automatically do an ls after each cd
 cd() {
-    if [ -n "$1" ]; then
-        builtin cd "$@" && ls
-    else
-        builtin cd ~ && ls
-    fi
+    builtin cd "$@" && ls
 }
 
 whatsmyip() {
@@ -81,11 +76,6 @@ whatsmyip() {
     echo -n "External IP: "
     curl -s ifconfig.me
 }
-
-# Bind Ctrl+f to insert zoxide
-if [[ $- == *i* ]]; then
-    bind '"\C-f":"zi\n"'
-fi
 
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"

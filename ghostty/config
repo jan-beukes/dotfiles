@@ -7,14 +7,19 @@ shell-integration-features = no-cursor
 cursor-style = block
 cursor-opacity = 0.8
 adjust-cursor-thickness = 1
+app-notifications = no-clipboard-copy
 confirm-close-surface = false
 maximize = true
 
 # keybinds
-keybind = ctrl+t=new_tab
 keybind = ctrl+shift+n=next_tab
 keybind = ctrl+shift+p=previous_tab
 keybind = ctrl+shift+x=close_tab
-keybind = ctrl+shift+q=ignore
 keybind = ctrl+shift+k=scroll_page_up
 keybind = ctrl+shift+j=scroll_page_down
+
+# unbind
+keybind = ctrl+shift+e=ignore
+keybind = ctrl+shift+o=ignore
+keybind = ctrl+shift+q=ignore
+

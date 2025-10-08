@@ -15,7 +15,6 @@ if [[ $iatest -gt 0 ]]; then
 fi
 
 #---EXPORTS---
-
 # Tell mesa to shut up about not being able to load nvidia driver
 export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
 export NARGA="28087887@open.rga.stb.sun.ac.za"
@@ -54,8 +53,8 @@ alias mv='mv -i'
 alias mkdir='mkdir -p'
 
 alias ls='eza'
-alias la='eza -ah'
-alias lsl='eza -lah'
+alias la='ls -ah'
+alias lsl='ls -lah'
 alias less='less -R'
 alias grep='grep --color=auto'
 alias du='du -h'
@@ -74,8 +73,12 @@ whatsmyip() {
         ifconfig wlan0 | grep "inet " | awk '{print $2}'
     fi
     echo -n "External IP: "
-    curl -s ifconfig.me
+    curl -s ip.me
 }
+
+
+# programs that use LS_COLORS for colors
+eval $(dircolors -b)
 
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"

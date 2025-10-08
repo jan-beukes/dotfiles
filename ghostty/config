@@ -1,13 +1,14 @@
 font-family = "Iosevka NF"
 font-size = 22
 window-theme = ghostty
-background = 181818
+background = 1b1b1b
 theme = Mellifluous
 shell-integration-features = no-cursor
 cursor-style = block
 cursor-opacity = 0.8
 adjust-cursor-thickness = 1
 app-notifications = no-clipboard-copy
+bell-features = no-title,no-attention
 confirm-close-surface = false
 maximize = true
 

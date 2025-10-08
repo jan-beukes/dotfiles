@@ -12,7 +12,7 @@ vim.opt.rtp:prepend(lazypath)
 --[[ Plugins ]]
 require('lazy').setup {
   {
-    "ramojus/mellifluous.nvim",
+    'ramojus/mellifluous.nvim',
     config = function()
       require("mellifluous").setup({
         transparent_background = { enabled = true, floating_windows = false },
@@ -25,9 +25,6 @@ require('lazy').setup {
     'stevearc/oil.nvim',
     dependencies = { { 'echasnovski/mini.icons', opts = {} } },
     opts = {
-      columns = {
-        'icon',
-      },
       view_options = {
         show_hidden = true,
       },
@@ -35,13 +32,11 @@ require('lazy').setup {
   },
 
   'tpope/vim-sleuth',
-
   {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
     config = true,
   },
-
   {
     'folke/which-key.nvim',
     event = 'VimEnter',
@@ -94,6 +89,26 @@ require('lazy').setup {
           prompt_title = 'Live Grep in Open Files',
         }
       end, { desc = '[S]earch [/] in Open Files' })
+    end,
+  },
+  {
+    'nvim-treesitter/nvim-treesitter',
+    branch = 'master',
+    build = ":TSUpdate",
+    config = function()
+      require'nvim-treesitter.configs'.setup {
+        ensure_installed = { "c", "bash", "comment", "lua", "markdown", "markdown_inline" },
+        auto_install = false,
+        highlight = {
+          enable = true
+          -- disable = function(lang, buf)
+          --   local max_filesize = 100 * 1024 -- 100 KB
+          --   local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+          --   if ok and stats and stats.size > max_filesize then
+          --   return true
+          -- end
+        }
+      }
     end,
   },
 }

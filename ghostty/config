@@ -16,11 +16,16 @@ maximize = true
 keybind = ctrl+shift+n=next_tab
 keybind = ctrl+shift+p=previous_tab
 keybind = ctrl+shift+x=close_tab
-keybind = ctrl+shift+k=scroll_page_up
-keybind = ctrl+shift+j=scroll_page_down
+keybind = ctrl+shift+u=scroll_page_up
+keybind = ctrl+shift+d=scroll_page_down
 
-# unbind
-keybind = ctrl+shift+e=ignore
-keybind = ctrl+shift+o=ignore
-keybind = ctrl+shift+q=ignore
+keybind = ctrl+shift+s=write_scrollback_file:paste
 
+keybind = ctrl+shift+"=new_split:down
+keybind = ctrl+shift+%=new_split:right
+
+keybind = ctrl+shift+h=goto_split:left
+keybind = ctrl+shift+j=goto_split:down
+keybind = ctrl+shift+k=goto_split:up
+keybind = ctrl+shift+l=goto_split:right
+keybind = ctrl+shift+q=close_surface

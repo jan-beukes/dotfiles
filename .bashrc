@@ -18,6 +18,7 @@ fi
 # Tell mesa to shut up about not being able to load nvidia driver
 export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
 export NARGA="28087887@open.rga.stb.sun.ac.za"
+export SRVR="jan@172.209.216.106"
 
 export HISTFILESIZE=10000
 export HISTSIZE=500

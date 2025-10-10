@@ -14,9 +14,13 @@ if [[ $iatest -gt 0 ]]; then
     bind "set show-all-if-ambiguous On"
 fi
 
+# Disable slop like Ctrl-s
+stty -ixon
+
 #---EXPORTS---
+
 # Tell mesa to shut up about not being able to load nvidia driver
-export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
+# export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
 export NARGA="28087887@open.rga.stb.sun.ac.za"
 export SRVR="jan@172.209.216.106"
 
@@ -37,17 +41,25 @@ export LESS_TERMCAP_ue=$'\e[m'
 export LESS_TERMCAP_us=$'\e[1;36m'
 export GROFF_NO_SGR=1
 
+# programs that use LS_COLORS for colors
+eval $(dircolors -b)
+
 # set up XDG folders
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
+export SUDO_EDITOR="nvim"
+
 #---ALIAS---
 alias vim='nvim'
 alias python='python3'
 alias open='xdg-open'
 alias fastfetch='fastfetch -c neofetch'
+
+alias xclip-copy='xclip -sel clipboard'
+alias xclip-paste='xclip -o -sel clipboard'
 
 alias cp='cp -i'
 alias mv='mv -i'
@@ -64,22 +76,6 @@ alias du='du -h'
 cd() {
     builtin cd "$@" && ls
 }
-
-whatsmyip() {
-    if command -v ip &> /dev/null; then
-        echo -n "Internal IP: "
-        ip addr show wlan0 | grep "inet " | awk '{print $2}' | cut -d/ -f1
-    else
-        echo -n "Internal IP: "
-        ifconfig wlan0 | grep "inet " | awk '{print $2}'
-    fi
-    echo -n "External IP: "
-    curl -s ip.me
-}
-
-
-# programs that use LS_COLORS for colors
-eval $(dircolors -b)
 
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"

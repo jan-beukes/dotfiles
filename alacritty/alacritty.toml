@@ -1,0 +1,45 @@
+[font] 
+normal.family = "Iosevka NF"
+bold.family = "Iosevka NF"
+italic.family = "Iosevka NF"
+bold_italic.family = "Iosevka NF"
+size = 22.0
+
+[window]
+startup_mode = "Maximized"
+
+[env]
+TERM = "alacritty"
+
+[colors]
+[colors.primary]
+background = "0x1a1a1a"
+foreground = "0xdadada"
+
+[colors.cursor]
+text = "0x1a1a1a"
+cursor = "0xbfad9e"
+
+[colors.selection]
+text = "0xc0af8c"
+background = "0x2d2d2d"
+
+[colors.normal]
+black = "0x1a1a1a"
+red = "0xd29393"
+green = "0xb3b393"
+yellow = "0xcbaa89"
+blue = "0xa8a1be"
+magenta = "0xb39fb0"
+cyan = "0xc0af8c"
+white = "0xdadada"
+
+[colors.bright]
+black = "0x5b5b5b"
+red = "0xc95954"
+green = "0x828040"
+yellow = "0xa6794c"
+blue = "0x5a6599"
+magenta = "0x9c6995"
+cyan = "0x74a39e"
+white = "0xffffff"

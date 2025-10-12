@@ -13,7 +13,7 @@ TERM = "alacritty"
 
 [colors]
 [colors.primary]
-background = "0x1a1a1a"
+background = "0x1d1d1d"
 foreground = "0xdadada"
 
 [colors.cursor]

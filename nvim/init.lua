@@ -44,6 +44,7 @@ vim.opt.path:append('/usr/lib/gcc/x86_64-pc-linux-gnu/*/include')
 vim.opt.path:append(vim.fn.system 'odin root')
 
 --[[ Keymaps ]]
+vim.keymap.set('i', '<C-f>', '<C-x><C-f>', { noremap = true, silent = true })
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })

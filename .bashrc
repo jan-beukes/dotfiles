@@ -17,12 +17,8 @@ fi
 # Disable slop like Ctrl-s
 stty -ixon
 
-#---EXPORTS---
-
 # Tell mesa to shut up about not being able to load nvidia driver
 # export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
-export NARGA="28087887@open.rga.stb.sun.ac.za"
-export SRVR="jan@172.209.216.106"
 
 export HISTFILESIZE=10000
 export HISTSIZE=500
@@ -56,7 +52,7 @@ export SUDO_EDITOR="nvim"
 alias vim='nvim'
 alias python='python3'
 alias open='xdg-open'
-alias fastfetch='fastfetch -c neofetch'
+alias neofetch='fastfetch -c neofetch'
 
 alias xclip-copy='xclip -sel clipboard'
 alias xclip-paste='xclip -o -sel clipboard'
@@ -77,5 +73,20 @@ cd() {
     builtin cd "$@" && ls
 }
 
+alias tmux-new='tmux new -s'
+tmux-attach() {
+    sessions=$(tmux list-sessions 2> /dev/null)
+    if [[ $? -ne 0 ]]; then
+        echo no active sessions
+        return 1
+    else
+        selected=$(echo $sessions | fzf --bind "enter:become(echo {} | sed 's/:.*//')")
+        tmux attach -t $selected
+    fi
+}
+
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
+
+export PATH="$HOME/.local/bin:$HOME/Software/AppImages":$PATH
+. "$HOME/.cargo/env"

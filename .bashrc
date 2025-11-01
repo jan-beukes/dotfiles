@@ -17,8 +17,9 @@ fi
 # Disable slop like Ctrl-s
 stty -ixon
 
-# Tell mesa to shut up about not being able to load nvidia driver
+# supress warnings
 # export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
+export WINEDEBUG=fixme-all,err-winediag,err-sync
 
 export HISTFILESIZE=10000
 export HISTSIZE=500
@@ -40,7 +41,7 @@ export GROFF_NO_SGR=1
 # programs that use LS_COLORS for colors
 eval $(dircolors -b)
 
-# set up XDG folders
+# set up XDG
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_STATE_HOME="$HOME/.local/state"
@@ -68,25 +69,43 @@ alias less='less -R'
 alias grep='grep --color=auto'
 alias du='du -h'
 
+# tmux wrappers
+tmn () {
+    if [[ $# -eq 0 ]]; then 
+        tmux
+    else
+        tmux new -s $@
+    fi
+}
+
+tma() {
+    if [[ $# -eq 0 ]]; then 
+        tmux attach
+    else
+        tmux attach -t $@
+    fi
+}
+
 # Automatically do an ls after each cd
 cd() {
     builtin cd "$@" && ls
 }
 
-alias tmux-new='tmux new -s'
-tmux-attach() {
-    sessions=$(tmux list-sessions 2> /dev/null)
-    if [[ $? -ne 0 ]]; then
-        echo no active sessions
-        return 1
-    else
-        selected=$(echo $sessions | fzf --bind "enter:become(echo {} | sed 's/:.*//')")
-        tmux attach -t $selected
-    fi
-}
-
+# Slop
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
 
-export PATH="$HOME/.local/bin:$HOME/Software/AppImages":$PATH
-. "$HOME/.cargo/env"
+# PATH DUDES
+appendpath () {
+    # makes sure we don't have duplicates
+    case ":$PATH:" in
+        *:"$1":*)
+            ;;
+        *)
+            PATH="${PATH:+$PATH:}$1"
+    esac
+}
+
+appendpath "$HOME/.local/bin"
+appendpath "$HOME/Software/AppImages"
+appendpath "$HOME/.cargo/bin"

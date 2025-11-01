@@ -32,11 +32,13 @@ require('lazy').setup {
   },
 
   'tpope/vim-sleuth',
+
   {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
     config = true,
   },
+
   {
     'folke/which-key.nvim',
     event = 'VimEnter',
@@ -91,6 +93,7 @@ require('lazy').setup {
       end, { desc = '[S]earch [/] in Open Files' })
     end,
   },
+
   {
     'nvim-treesitter/nvim-treesitter',
     branch = 'master',

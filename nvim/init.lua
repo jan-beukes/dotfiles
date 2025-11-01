@@ -2,7 +2,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Format
-vim.opt.textwidth = 80
+vim.opt.textwidth = 100
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.autoindent = true
@@ -20,10 +20,7 @@ vim.syntax = true
 vim.g.c_syntax_for_h = true -- This is blasphemy
 
 vim.opt.mouse = 'a'
--- Sync clipboard between OS and Neovim.
-vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus'
-end)
+vim.opt.clipboard = 'unnamedplus'
 
 vim.opt.breakindent = true
 vim.opt.undofile = true
@@ -38,9 +35,10 @@ vim.opt.splitbelow = true
 vim.opt.list = true
 vim.opt.listchars = { tab = '· ', trail = ' ', nbsp = '␣' }
 
--- Add search directories to path
+-- Add directories to path
+vim.opt.path:append('/usr/include')
 vim.opt.path:append('/usr/local/include')
-vim.opt.path:append('/usr/lib/gcc/x86_64-pc-linux-gnu/*/include')
+vim.opt.path:append('/usr/lib/gcc/x86_64-unknown-linux-gnu/*/include/')
 vim.opt.path:append(vim.fn.system 'odin root')
 
 --[[ Keymaps ]]
@@ -63,14 +61,15 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
--- remove auto comment inserts
-vim.api.nvim_create_autocmd('BufWinEnter', {
-  command = 'set formatoptions-=ro | set formatoptions+=t',
-})
 
+--[[ File Types ]]
 vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
   pattern = { '*.wistl' },
   command = 'setfiletype wistl',
+})
+vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
+  pattern = { '*.asm' },
+  command = 'setfiletype nasm',
 })
 
 require 'plugins'

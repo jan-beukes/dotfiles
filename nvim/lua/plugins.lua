@@ -1,4 +1,3 @@
--- bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
@@ -102,16 +101,7 @@ require('lazy').setup {
       require'nvim-treesitter.configs'.setup {
         ensure_installed = { "c", "bash", "comment", "lua", "markdown", "markdown_inline" },
         auto_install = false,
-        highlight = {
-          enable = true,
-          disable = function(lang, buf)
-            local max_filesize = 1024 * 1024
-            local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-            if ok and stats and stats.size > max_filesize then
-              return true
-            end
-          end
-        }
+        highlight = { enable = true }
       }
     end,
   },

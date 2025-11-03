@@ -77,8 +77,8 @@ if exists("*searchpairpos")
 	" patterns.
 	function! s:match_one(patterns, string)
 		let list = type(a:patterns) == type([])
-		           \ ? a:patterns
-		           \ : map(split(a:patterns, ','), '"^" . v:val . "$"')
+			   \ ? a:patterns
+			   \ : map(split(a:patterns, ','), '"^" . v:val . "$"')
 		for pat in list
 			if a:string =~# pat | return 1 | endif
 		endfor

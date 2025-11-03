@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # Checks if laptop is plugged in an sets primary GPU and brightness
+# Might as well since current x11 nvidia slop is cooked with external monitor
 
 BATTERY_BRIGHTNESS=80
 
@@ -13,11 +14,9 @@ else
 fi
 
 if [[ "$POWER_STATUS" -eq 1 ]]; then
-    # AC
     /usr/local/bin/set-gpu on
     brightnessctl set "100%"
 else
-    # BATTERY
     /usr/local/bin/set-gpu off
     brightnessctl set "$BATTERY_BRIGHTNESS%"
 fi

@@ -21,7 +21,7 @@ stty -ixon
 # export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
 export WINEDEBUG=fixme-all,err-winediag,err-sync
 
-export HISTFILESIZE=10000
+export HISTFILESIZE=5000
 export HISTSIZE=500
 export HISTTIMEFORMAT="%F %T - "
 export HISTCONTROL=erasedups:ignoredups:ignorespace
@@ -46,6 +46,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
+export RLWRAP_HOME="$HOME/.local/share/rlwrap"
 
 export SUDO_EDITOR="nvim"
 
@@ -62,7 +63,8 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
 
-alias ls='eza'
+alias bat='bat --theme=ansi'
+alias ls='ls --color=auto'
 alias la='ls -ah'
 alias lsl='ls -lah'
 alias less='less -R'
@@ -102,7 +104,7 @@ appendpath () {
         *:"$1":*)
             ;;
         *)
-            PATH="${PATH:+$PATH:}$1"
+        export PATH="$1:$PATH"
     esac
 }
 

@@ -1,8 +1,9 @@
 #!/bin/sh
 
 XORG_CONF_DIR="/etc/X11/xorg.conf.d"
-NVIDIA_CONF="$XORG_CONF_DIR/10-nvidia-primary-gpu.conf"
-NVIDIA_CONF_DIS="$XORG_CONF_DIR/10-nvidia-primary-gpu.conf.dis"
+
+NVIDIA_CONF="$XORG_CONF_DIR/10-nvidia-gpu.conf"
+NVIDIA_CONF_DIS="$XORG_CONF_DIR/10-nvidia-gpu.conf.dis"
 
 if [ $# -ne 1 ]; then
     echo "usage: set-gpu [on|off]"

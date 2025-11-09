@@ -10,6 +10,11 @@ vim.opt.rtp:prepend(lazypath)
 
 --[[ Plugins ]]
 require('lazy').setup {
+
+  -- language support
+  'marekmaskarinec/vim-umka',
+  'janet-lang/janet.vim',
+
   {
     'ramojus/mellifluous.nvim',
     config = function()
@@ -99,7 +104,7 @@ require('lazy').setup {
     build = ":TSUpdate",
     config = function()
       require'nvim-treesitter.configs'.setup {
-        ensure_installed = { "c", "bash", "comment", "lua", "markdown", "markdown_inline" },
+        ensure_installed = { "c", "bash", "comment", "lua", "markdown" },
         auto_install = false,
         highlight = { enable = true }
       }

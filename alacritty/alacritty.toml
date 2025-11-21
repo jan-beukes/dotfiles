@@ -22,7 +22,7 @@ TERM = "alacritty"
 # mellifluous
 [colors]
 [colors.primary]
-background = "0x1c1c1c"
+background = "0x1a1a1a"
 foreground = "0xdadada"
 
 [colors.cursor]

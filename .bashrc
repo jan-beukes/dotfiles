@@ -56,9 +56,6 @@ alias python='python3'
 alias open='xdg-open'
 alias neofetch='fastfetch -c neofetch'
 
-alias xclip-copy='xclip -sel clipboard'
-alias xclip-paste='xclip -o -sel clipboard'
-
 alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
@@ -107,7 +104,6 @@ appendpath () {
         export PATH="$1:$PATH"
     esac
 }
-
 appendpath "$HOME/.local/bin"
 appendpath "$HOME/Software/AppImages"
 appendpath "$HOME/.cargo/bin"

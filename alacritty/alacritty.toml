@@ -1,16 +1,16 @@
 [font] 
 size = 22.0
 [font.bold]
-family = "Iosevka Comfy"
+family = "Iosevka NF"
 style = "Bold"
 [font.bold_italic]
-family = "Iosevka Comfy"
+family = "Iosevka NF"
 style = "Bold Italic"
 [font.italic]
-family = "Iosevka Comfy"
+family = "Iosevka NF"
 style = "Italic"
 [font.normal]
-family = "Iosevka Comfy"
+family = "Iosevka NF"
 style = "Regular"
 
 [window]

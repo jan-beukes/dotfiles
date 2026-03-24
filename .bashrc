@@ -14,7 +14,7 @@ if [[ $iatest -gt 0 ]]; then
     bind "set show-all-if-ambiguous On"
 fi
 
-# Disable slop like Ctrl-s
+# Disable stuff like Ctrl-s
 stty -ixon
 
 # supress warnings
@@ -38,10 +38,7 @@ export LESS_TERMCAP_ue=$'\e[m'
 export LESS_TERMCAP_us=$'\e[1;36m'
 export GROFF_NO_SGR=1
 
-# programs that use LS_COLORS for colors
-eval $(dircolors -b)
-
-# set up XDG
+# XDG and stuff
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_STATE_HOME="$HOME/.local/state"
@@ -49,10 +46,15 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export RLWRAP_HOME="$HOME/.local/share/rlwrap"
 
 export SUDO_EDITOR="nvim"
+export JAVAFX=~/Projects/thirdparty/javafx-sdk-25.0.2/lib
+
+# programs that use LS_COLORS for colors
+eval $(dircolors -b ~/.dircolors)
+eval "$(starship init bash)"
+eval "$(zoxide init bash)"
 
 #---ALIAS---
 alias vim='nvim'
-alias python='python3'
 alias open='xdg-open'
 alias neofetch='fastfetch -c neofetch'
 
@@ -60,39 +62,23 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
 
-alias bat='bat --theme=ansi'
 alias ls='ls --color=auto'
 alias la='ls -ah'
 alias lsl='ls -lah'
+
 alias less='less -R'
 alias grep='grep --color=auto'
 alias du='du -h'
-
-# tmux wrappers
-tmn () {
-    if [[ $# -eq 0 ]]; then 
-        tmux
-    else
-        tmux new -s $@
-    fi
-}
-
-tma() {
-    if [[ $# -eq 0 ]]; then 
-        tmux attach
-    else
-        tmux attach -t $@
-    fi
-}
 
 # Automatically do an ls after each cd
 cd() {
     builtin cd "$@" && ls
 }
 
-# Slop
-eval "$(starship init bash)"
-eval "$(zoxide init bash)"
+umu-run() {
+    proton=$(echo ~/.steam/steam/compatibilitytools.d/GE-Proton* | head -1)
+    PROTONPATH=$proton /bin/umu-run $@
+}
 
 # PATH DUDES
 appendpath () {

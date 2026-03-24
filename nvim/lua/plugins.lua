@@ -12,8 +12,6 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup {
 
   -- language support
-  'marekmaskarinec/vim-umka',
-  'janet-lang/janet.vim',
 
   {
     'ramojus/mellifluous.nvim',

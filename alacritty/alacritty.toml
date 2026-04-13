@@ -1,28 +1,24 @@
 [font] 
 size = 22.0
 [font.bold]
-family = "Iosevka NF"
+family = "Iosevka Comfy"
 style = "Bold"
 [font.bold_italic]
-family = "Iosevka NF"
+family = "Iosevka Comfy"
 style = "Bold Italic"
 [font.italic]
-family = "Iosevka NF"
+family = "Iosevka Comfy"
 style = "Italic"
 [font.normal]
-family = "Iosevka NF"
+family = "Iosevka Comfy"
 style = "Regular"
 
 [window]
 startup_mode = "Maximized"
 
-[env]
-TERM = "alacritty"
-
 # mellifluous
-[colors]
 [colors.primary]
-background = "0x1a1a1a"
+background = "0x1e1e1e"
 foreground = "0xdadada"
 
 [colors.cursor]

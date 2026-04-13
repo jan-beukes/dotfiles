@@ -39,12 +39,14 @@ export LESS_TERMCAP_us=$'\e[1;36m'
 export GROFF_NO_SGR=1
 
 # XDG and stuff
-export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 export RLWRAP_HOME="$HOME/.local/share/rlwrap"
 
+export XCURSOR_THEME=breeze_cursors
+export XCURSOR_SIZE=24
 export SUDO_EDITOR="nvim"
 export JAVAFX=~/Projects/thirdparty/javafx-sdk-25.0.2/lib
 
@@ -75,6 +77,7 @@ cd() {
     builtin cd "$@" && ls
 }
 
+# To run non-steam games with proton
 umu-run() {
     proton=$(echo ~/.steam/steam/compatibilitytools.d/GE-Proton* | head -1)
     PROTONPATH=$proton /bin/umu-run $@

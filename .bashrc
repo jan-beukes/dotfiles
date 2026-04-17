@@ -48,7 +48,7 @@ export RLWRAP_HOME="$HOME/.local/share/rlwrap"
 export XCURSOR_THEME=breeze_cursors
 export XCURSOR_SIZE=24
 export SUDO_EDITOR="nvim"
-export JAVAFX=~/Projects/thirdparty/javafx-sdk-25.0.2/lib
+export JAVAFX="$HOME/Projects/libs/javafx-sdk-25.0.2/lib"
 
 # programs that use LS_COLORS for colors
 eval $(dircolors -b ~/.dircolors)

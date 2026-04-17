@@ -1,7 +1,7 @@
+--[[ Options ]]
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Formatting
 vim.opt.textwidth = 100
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
@@ -14,10 +14,9 @@ vim.opt.scrolloff = 3
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-vim.opt.signcolumn = 'no'
-vim.opt.showmode = false -- Tis in statusbar
-vim.opt.termguicolors = true
 vim.syntax = true
+vim.opt.signcolumn = 'no'
+vim.opt.termguicolors = true
 vim.g.c_syntax_for_h = true -- This is blasphemy
 
 vim.opt.mouse = 'a'
@@ -56,8 +55,6 @@ vim.keymap.set('n', '<Leader>yf', ':let @+ = expand(\'%:p\')<CR>',
   { silent = true, desc = 'Yank file path' })
 
 --[[ Commands/Autocommands ]]
-
--- Highlight when yanking text
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
     vim.highlight.on_yank()
@@ -67,14 +64,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- remove auto comment inserts
 vim.api.nvim_create_autocmd('BufWinEnter', {
   command = 'set formatoptions-=ro | set formatoptions+=t',
-})
-
--- Disable tree sitter parsers that I don't want
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'c', 'markdown' },
-  callback = function(ev)
-    vim.treesitter.stop()
-  end
 })
 
 vim.api.nvim_create_autocmd('FileType', {

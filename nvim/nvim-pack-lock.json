@@ -5,16 +5,12 @@
       "src": "https://github.com/bakpakin/janet.vim"
     },
     "mellifluous.nvim": {
-      "rev": "9948359e1536b4171615f7280e61e17620e3fd45",
+      "rev": "ec0575bdb63594c5e7fba6eb9607b009aa1fb74e",
       "src": "https://github.com/ramojus/mellifluous.nvim"
     },
     "nvim-autopairs": {
       "rev": "59bce2eef357189c3305e25bc6dd2d138c1683f5",
       "src": "https://github.com/windwp/nvim-autopairs"
-    },
-    "odin.vim": {
-      "rev": "f46cdf509aca0b18b9815462e75b775b5bc237a3",
-      "src": "https://github.com/Tetralux/odin.vim"
     },
     "oil.nvim": {
       "rev": "0fcc83805ad11cf714a949c98c605ed717e0b83e",
@@ -25,7 +21,7 @@
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "telescope.nvim": {
-      "rev": "471eebb1037899fd942cc0f52c012f8773505da1",
+      "rev": "028d9a0695a0cc4cfa893889f8c408ed7ccc8adc",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "vim-sleuth": {

@@ -1,3 +1,5 @@
+" modified version of https://github.com/Tetralux/odin.vim
+
 if exists("b:current_syntax")
   finish
 endif
@@ -79,7 +81,11 @@ syntax match odinEscape display contained /\\\([nrt\\'"]\|x\x\{2}\)/
 syntax match odinFunctionDecl "\v<\w*>(\s*::\s*proc)@="
 syntax match odinFunctionCall "\v\w+\s*(\()@="
 
-syntax match odinTagNote "@\<\w\+\>" display
+syntax match odinAttribute "@\ze\<\w\+\>" display
+syntax region odinAttribute
+      \ matchgroup=odinAttribute
+      \ start="@\ze(" end="\ze)"
+      \ transparent oneline
 
 syntax match odinConstant "\v<[A-Z0-9,_]+>" display
 syntax match odinRange "\.\." display
@@ -163,6 +169,7 @@ highlight link odinAssign Operator
 highlight link odinTernaryQMark Operator
 highlight link odinReturnOp Operator
 
+highlight link odinEscape Special
 highlight link odinString String
 highlight link odinRawString String
 highlight link odinChar String
@@ -195,7 +202,7 @@ highlight link odinHack Todo
 
 highlight link odinTemplate Constant
 
-highlight link odinTagNote Identifier
+highlight link odinAttribute Keyword
 highlight link odinDataType Type
 highlight link odinBool Boolean
 highlight link odinConstant Constant

@@ -9,6 +9,8 @@ require('mellifluous').setup({
   },
 })
 vim.cmd.colorscheme 'mellifluous'
+
+-- goober line
 local statusline = { ' %t', '%r', '%m', '%=', '%{&filetype}', ' %2p%%', ' %3l:%-2c ' }
 vim.o.statusline = table.concat(statusline, '')
 
@@ -20,17 +22,13 @@ vim.pack.add({
   'https://github.com/stevearc/oil.nvim',
   'https://github.com/folke/which-key.nvim',
   'https://github.com/windwp/nvim-autopairs',
-  'https://github.com/nvim-telescope/telescope.nvim',
   'https://github.com/nvim-lua/plenary.nvim',
+  'https://github.com/nvim-telescope/telescope.nvim',
 })
 vim.api.nvim_create_user_command('PackUpdate', function(_) vim.pack.update() end , {})
-vim.api.nvim_create_user_command('PackDelete',
-  function(args) vim.pack.del(args.fargs) end,
-  { complete = 'packadd', nargs = '*' }
-)
+vim.api.nvim_create_user_command('PackDelete', function(a) vim.pack.del(a.fargs) end, { complete = 'packadd', nargs = '*' })
 
 require('nvim-autopairs').setup {}
-
 
 -- Oil
 local show_detail = false
@@ -59,11 +57,11 @@ require('oil').setup({
 require('telescope').setup({
   defaults = {
     preview = { 
-      -- Don't disable every one
-      treesitter = { disable = disabled_tree_sitter_parsers }
+      treesitter = { disable = { 'c' } }
     }
   },
 })
+
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })

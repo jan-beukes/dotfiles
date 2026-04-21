@@ -20,7 +20,6 @@ vim.pack.add({
   'https://github.com/tpope/vim-sleuth',
 
   'https://github.com/stevearc/oil.nvim',
-  'https://github.com/folke/which-key.nvim',
   'https://github.com/windwp/nvim-autopairs',
   'https://github.com/nvim-lua/plenary.nvim',
   'https://github.com/nvim-telescope/telescope.nvim',
@@ -73,9 +72,12 @@ vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' }
 vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files' })
 vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
+vim.keymap.set('n', '<leader>sb', function()
+  builtin.grep_string({ grep_open_files = true })
+end, { desc = '[S]earch word in Open [B]uffers' })
 vim.keymap.set('n', '<leader>s/', function()
-  builtin.live_grep {
+  builtin.live_grep({
     grep_open_files = true,
     prompt_title = 'Live Grep in Open Files',
-  }
+  })
 end, { desc = '[S]earch [/] in Open Files' })

@@ -1,6 +1,7 @@
 --[[ Options ]]
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.g.c_syntax_for_h = true -- This is blasphemy
 
 vim.opt.textwidth = 100
 vim.opt.tabstop = 4
@@ -9,16 +10,16 @@ vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.expandtab = true
 
+vim.opt.timeout = false
 vim.opt.autochdir = true
 vim.opt.scrolloff = 3
 vim.opt.number = true
 vim.opt.relativenumber = true
 
 vim.syntax = true
+vim.opt.guicursor='n-v-c-i:block'
 vim.opt.signcolumn = 'no'
 vim.opt.termguicolors = true
-vim.g.c_syntax_for_h = true -- This is blasphemy
-
 vim.opt.mouse = 'a'
 vim.opt.clipboard = 'unnamedplus'
 

@@ -41,10 +41,8 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 export SUDO_EDITOR=nvim
-export XCURSOR_THEME=breeze_cursors
-export XCURSOR_SIZE=24
 export RLWRAP_HOME="$HOME/.local/share/rlwrap"
-export JAVAFX="$HOME/Projects/libs/javafx-sdk-25.0.2/lib"
+export JAVAFX="$HOME/Projects/libs/javafx-sdk-25.0.3/lib"
 
 # programs that use LS_COLORS for colors
 eval $(dircolors -b ~/.dircolors)
@@ -64,19 +62,17 @@ alias ls='ls --color=auto'
 alias la='ls -ah'
 alias lsl='ls -lah'
 
-alias less='less -R'
 alias grep='grep --color=auto'
 alias du='du -h'
+
+# Wine gives constant errors for egl and driver loading. This tells mesa to use the zink driver which
+# Seems to stop the warnings.
+# Zink is probably fine for just my windows dev stuff https://docs.mesa3d.org/drivers/zink.html 
+alias wine='MESA_LOADER_DRIVER_OVERRIDE=zink wine'
 
 # Automatically do an ls after each cd
 cd() {
     builtin cd "$@" && ls
-}
-
-# To run non-steam games with proton
-umu-run() {
-    proton=$(echo ~/.steam/steam/compatibilitytools.d/GE-Proton* | head -1)
-    PROTONPATH=$proton /bin/umu-run $@
 }
 
 # makes sure we don't have duplicates

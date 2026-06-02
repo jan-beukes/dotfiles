@@ -1,24 +1,16 @@
 [font] 
 size = 22.0
-[font.bold]
-family = "Iosevka Comfy"
-style = "Bold"
-[font.bold_italic]
-family = "Iosevka Comfy"
-style = "Bold Italic"
-[font.italic]
-family = "Iosevka Comfy"
-style = "Italic"
-[font.normal]
-family = "Iosevka Comfy"
-style = "Regular"
+normal = { family = "Aporetic Sans Mono", style = "Regular" }
 
 [window]
 startup_mode = "Maximized"
 
+[env]
+TERM = "xterm-256color"
+
 # mellifluous
 [colors.primary]
-background = "0x1f1f1f"
+background = "0x181818"
 foreground = "0xdadada"
 
 [colors.cursor]

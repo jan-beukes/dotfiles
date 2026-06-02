@@ -1,14 +1,15 @@
 --[[ Options ]]
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-vim.g.c_syntax_for_h = true -- This is blasphemy
 
-vim.opt.textwidth = 100
-vim.opt.tabstop = 4
+vim.opt.textwidth = 120
 vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
-vim.opt.expandtab = true
+-- C indent is so cooked man
+vim.opt.cinoptions = 'l1,b1,(s,m1,j1,+0'
 
 vim.opt.timeout = false
 vim.opt.autochdir = true
@@ -17,7 +18,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 vim.syntax = true
-vim.opt.guicursor='n-v-c-i:block'
+vim.opt.guicursor=''
 vim.opt.signcolumn = 'no'
 vim.opt.termguicolors = true
 vim.opt.mouse = 'a'
@@ -32,12 +33,21 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 vim.opt.list = true
-vim.opt.listchars = { tab = '· ', trail = ' ', nbsp = '~' }
+vim.opt.listchars = { tab = '| ', trail = ' ', nbsp = '~' }
 
+vim.g.c_syntax_for_h = true -- This is blasphemy
+vim.filetype.add({
+  extension = {
+    ["vs"]  = "glsl",
+    ["fs"]  = "glsl",
+    ["asm"] = "nasm",
+  }
+})
 --[[ Search Path ]]
 vim.opt.path:append('/usr/include')
 vim.opt.path:append('/usr/local/include')
-vim.opt.path:append('/usr/lib/gcc/x86_64-unknown-linux-gnu/*/include')
+vim.opt.path:append('/usr/lib/gcc/x86_64-pc-linux-gnu/*/include')
+vim.opt.path:append('/home/jan/Projects/libs/**')
 vim.opt.path:append(vim.fn.system 'odin root' .. '**')
 
 --[[ Keymaps ]]
@@ -61,17 +71,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
-
 -- remove auto comment inserts
 vim.api.nvim_create_autocmd('BufWinEnter', {
   command = 'set formatoptions-=ro | set formatoptions+=t',
 })
-
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'asm' },
-  command = 'setfiletype nasm',
-})
-
 -- Create new split for terminal commands
 vim.api.nvim_create_user_command('T', function(opts)
   vim.cmd('horizontal terminal ' .. opts.args)
@@ -79,5 +82,4 @@ end, {
     nargs = '*',
     complete = 'shellcmd'
 })
-
 require 'plugins'

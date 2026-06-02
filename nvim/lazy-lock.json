@@ -1,0 +1,10 @@
+{
+  "janet.vim": { "branch": "master", "commit": "a13ab9faad0c1cb11b31bb7f5d528b8668b166bb" },
+  "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
+  "mellifluous.nvim": { "branch": "main", "commit": "ec0575bdb63594c5e7fba6eb9607b009aa1fb74e" },
+  "mini.nvim": { "branch": "main", "commit": "9d0b9b7188d5c24b5a87f0d8b383ec8bda7a0de4" },
+  "nvim-autopairs": { "branch": "master", "commit": "7b9923abad60b903ece7c52940e1321d39eccc79" },
+  "oil.nvim": { "branch": "master", "commit": "b91ee5a77a6a9605d9c1aaf4fda74b66082c8297" },
+  "plenary.nvim": { "branch": "master", "commit": "74b06c6c75e4eeb3108ec01852001636d85a932b" },
+  "telescope.nvim": { "branch": "master", "commit": "7d324792b7943e4aa16ad007212e6acc6f9fe335" }
+}
